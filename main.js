@@ -41,17 +41,20 @@ function addEvents() {
         btn.addEventListener("click", handle_remoeCartItem)
     });
 
-// Change item quantity
-let cartQuantity_inputs = document.querySelectorAll('.cart-quantity');
-cartQuantity_inputs.forEach(input => {
-input.addEventListener("change", handle_changeItemQuantity);
-console.log(input.addEventListener("change", handle_changeItemQuantity));
+    // Change item quantity
+    let cartQuantity_inputs = document.querySelectorAll('.cart-quantity');
+    cartQuantity_inputs.forEach(input => {
+        input.addEventListener("change", handle_changeItemQuantity);
+        // console.log(input.addEventListener("change", handle_changeItemQuantity));
 
-})
+    })
 
-console.log(cartQuantity_inputs);
-console.log(cartQuantity_inputs);
-
+    // console.log(cartQuantity_inputs);
+    // Add item to cart
+    let addCart_btns = document.querySelectorAll(".add-cart");
+    addCart_btns.forEach(btn => {
+        btn.addEventListener("click", handle_addCartItem)
+    })
 
 
 
@@ -61,23 +64,60 @@ console.log(cartQuantity_inputs);
 
 }
 // ============handle_event function=========
+
+
+function handle_addCartItem() {
+    let product = this.parentElement;
+
+}
+function handle_addCartItem() {
+    let product = this.parentElement;
+    let title = product.querySelector(".product-title").innerHTML;
+    let price = product.querySelector(".product-price").innerHTML;
+    let imgsrc = product.querySelector(".product-img").src;
+    console.log(title, price, imgsrc);
+    let newToAdd = { title, price,   imgsrc };
+    //handle item is as exited 
+    // handle item is already exist
+    // handle item is already exist
+    
+
+    
+    // Add product to cart                           imgsrc
+    let cartBoxElement = CartBoxComponent(title, price, imgsrc);
+    let newNode = document.createElement('div');
+
+    newNode.innerHTML = cartBoxElement;
+    const cartcontent = cart.querySelector(".cart-content");
+    cartcontent.appendChild(newNode);
+    update()
+}
+
+
+
+
+
+
+
+
+
 function handle_remoeCartItem() {
     this.parentElement.remove();
     update()
 }
 
 function handle_changeItemQuantity() {
-    if (isNaN(this.value)||this.value<1) {
-    this.value = 1;
+    if (isNaN(this.value) || this.value < 1) {
+        this.value = 1;
     }
     this.value = Math.floor(this.value); // to keep it integer
-    update(); I
-    }
+    update();
+}
 // ==    == UPDATE & RERENDER FUNCTIONS
 
 function updateTotal() {
     let cartBoxes = document.querySelectorAll(".cart-box");
-    const totalElement = cart.querySelector(".total-price") ;
+    const totalElement = cart.querySelector(".total-price");
 
     let total = 0;
     cartBoxes.forEach((cartBox) => {
@@ -88,17 +128,30 @@ function updateTotal() {
         console.log(total);
     });
 
-//keep 2 digits after the decimal point  12,22222 >> 12,12
-    total=total.toFixed(2) 
-if (total==0) {
+    //keep 2 digits after the decimal point  12,22222 >> 12,12
+    total = total.toFixed(2)
+    if (total == 0) {
 
-// ram >>>> pay now must be <a> or botton
-    totalElement.innerHTML = "$"+ total+ " pay now";
-} else {
-    totalElement.innerHTML = "$"+ total;
+        // ram >>>> pay now must be <a> or botton
+        totalElement.innerHTML = "$" + total + " pay now";
+    } else {
+        totalElement.innerHTML = "$" + total;
+
+    }
+
 
 }
 
+//  html Commponant 
+// let cartBoxElement = CartBoxComponent(title,price,imgSrc)
 
-    // totalElement.innerHTML = "$"+ total;
-} 
+function CartBoxComponent(title, price, imgSrc) {
+    return '<div class="cart-content"> <div class="cart-box">' +
+        '<img src="' + imgSrc + '" alt="" class="cart-img"> <div class="detail-box">'
+        + ' <div class="cart-product-title">' + title + '</div>'
+        + '   <div class="cart-price">' + price + '</div>'
+        + '<input type="number" value="1" class="cart-quantity">'
+        + '</div><!-- REMOVE CART --><i class="bx bxs-trash-alt cart-remove"></i></div></div>';
+
+}
+
