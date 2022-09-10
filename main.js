@@ -56,8 +56,8 @@ function addEvents() {
         btn.addEventListener("click", handle_addCartItem)
     })
 
-
-
+var buy_btn=document.querySelector(".btn-buy")
+buy_btn.addEventListener("click",handle_buyOrder)
 
 
 
@@ -65,7 +65,7 @@ function addEvents() {
 }
 // ============handle_event function=========
 
-
+let itemAdded=[]
 function handle_addCartItem() {
     let product = this.parentElement;
 
@@ -80,9 +80,18 @@ function handle_addCartItem() {
     //handle item is as exited 
     // handle item is already exist
     // handle item is already exist
-    
+    if (itemAdded.find((el) => el.title == newToAdd.title)) {
 
-    
+        alert("This Item Is Already Exist!");
+        return;
+
+    } 
+    else {
+        itemAdded.push(newToAdd);
+
+    }
+
+
     // Add product to cart                           imgsrc
     let cartBoxElement = CartBoxComponent(title, price, imgsrc);
     let newNode = document.createElement('div');
@@ -99,10 +108,13 @@ function handle_addCartItem() {
 
 
 
-
-
+ 
 function handle_remoeCartItem() {
     this.parentElement.remove();
+    itemAdded =itemAdded.filter(
+    (el) => el.title !=
+    this.parentElement.querySelector(".cart-product-title").innerHTML
+    )
     update()
 }
 
@@ -113,6 +125,18 @@ function handle_changeItemQuantity() {
     this.value = Math.floor(this.value); // to keep it integer
     update();
 }
+
+function handle_buyOrder( ) {
+    console.log("fdf");
+    if (itemAdded.length<=0) {
+        alert("no order ")
+        itemAdded
+    }
+    
+}
+
+
+
 // ==    == UPDATE & RERENDER FUNCTIONS
 
 function updateTotal() {
