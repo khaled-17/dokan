@@ -130,9 +130,13 @@ function handle_buyOrder( ) {
     console.log("fdf");
     if (itemAdded.length<=0) {
         alert("no order ")
-        itemAdded
+        return;
     }
-    
+    var cartcontent=cart.querySelector(".cart-content")
+    console.log(cartcontent);
+    cartcontent.innerHTML=" handle_buyOrder";
+    alert("you orderd succesefuly ")
+update();
 }
 
 
