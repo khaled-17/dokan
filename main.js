@@ -136,6 +136,7 @@ function handle_buyOrder( ) {
     console.log(cartcontent);
     cartcontent.innerHTML=" handle_buyOrder";
     alert("you orderd succesefuly ")
+    itemAdded
 update();
 }
 
