@@ -32,8 +32,7 @@ function update() {
 }
 
 //========== ADD EVENTS ====
-
-function addEvents() {
+ function addEvents() {
     // Remove items from cart
     let cartRemove_btns = document.querySelectorAll(".cart-remove");
     // console.log(cartRemove_btns);
@@ -45,7 +44,7 @@ function addEvents() {
     let cartQuantity_inputs = document.querySelectorAll('.cart-quantity');
     cartQuantity_inputs.forEach(input => {
         input.addEventListener("change", handle_changeItemQuantity);
-        // console.log(input.addEventListener("change", handle_changeItemQuantity));
+        console.log(input.addEventListener("change", handle_changeItemQuantity));
 
     })
 
@@ -75,8 +74,8 @@ function handle_addCartItem() {
     let title = product.querySelector(".product-title").innerHTML;
     let price = product.querySelector(".product-price").innerHTML;
     let imgsrc = product.querySelector(".product-img").src;
-    console.log(title, price, imgsrc);
-    let newToAdd = { title, price,   imgsrc };
+    // console.log(title, price, imgsrc);
+    let newToAdd = { title, price, imgsrc };
     //handle item is as exited 
     // handle item is already exist
     // handle item is already exist
@@ -87,6 +86,7 @@ function handle_addCartItem() {
 
     } 
     else {
+
         itemAdded.push(newToAdd);
 
     }
@@ -111,6 +111,7 @@ function handle_addCartItem() {
  
 function handle_remoeCartItem() {
     this.parentElement.remove();
+    // ظظظ ؟؟
     itemAdded =itemAdded.filter(
     (el) => el.title !=
     this.parentElement.querySelector(".cart-product-title").innerHTML
@@ -130,6 +131,7 @@ function handle_buyOrder( ) {
     console.log("fdf");
     if (itemAdded.length<=0) {
         alert("no order ")
+        //????
         return;
     }
     var cartcontent=cart.querySelector(".cart-content")
