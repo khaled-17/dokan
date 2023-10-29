@@ -1,16 +1,103 @@
-//  opeen & close cart
-const cartIcon = document.querySelector("#cart-icon");
-const cart = document.querySelector(".cart");
-const closeCart = document.querySelector("#cart-close");
+const products = [
+    {
+      id: 1,
+      imgSrc: 'assets/img/product1.jpg',
+      title: 'Nike Shoes1',
+      price: '$79.5',
+    },
+    {
+      id: 2,
+      imgSrc: 'assets/img/product2.jpg',
+      title: 'Nike Shoes2',
+      price: '$79.5',
+    },
+    {
+      id: 3,
+      imgSrc: 'assets/img/product3.jpg',
+      title: 'Nike Shoes3',
+      price: '$79.5',
+    },
+    {
+      id: 4,
+      imgSrc: 'assets/img/product4.jpg',
+      title: 'Nike Shoes4',
+      price: '$79.5',
+    },
+    {
+      id: 5,
+      imgSrc: 'assets/img/product5.jpg',
+      title: 'Nike Shoes5',
+      price: '$79.5',
+    },
+    {
+      id: 6,
+      imgSrc: 'assets/img/product6.jpg',
+      title: 'Nike Shoes6',
+      price: '$79.5',
+    },
+    {
+      id: 7,
+      imgSrc: 'assets/img/product7.jpg',
+      title: 'Nike Shoes7',
+      price: '$79.5',
+    },
+    {
+      id: 8,
+      imgSrc: 'assets/img/product8.jpg',
+      title: 'Nike Shoes8',
+      price: '$79.5',
+    },
+  ];
+  
 
+
+//  open & close cart
+const cartIcon = document.querySelector("#cart-icon");
 cartIcon.addEventListener("click", () => {
     cart.classList.add("active");
 });
 
+const closeCart = document.querySelector("#cart-close");
 closeCart.addEventListener("click", () => {
     cart.classList.remove("active");
 
 });
+
+
+
+// add and bost your products 
+const shopContent = document.querySelector(".shop-content");
+
+document.addEventListener('DOMContentLoaded', function () {
+
+     products.forEach(product => {
+        const productElement = document.createElement('div');
+       
+        productElement.innerHTML = `
+        <div class="product-box">
+        <img src="${product.imgSrc}" alt="${product.title}" class="product-img">
+        <h2 class="product-title">${product.title}</h2>
+        <span class="product-price">${product.price}</span>
+        <i class=' bx bx-shopping-bag add-cart'></i>
+
+     </div>
+        `;
+        shopContent.appendChild(productElement);
+    });
+
+
+     
+});
+
+
+
+
+
+
+
+const cart = document.querySelector(".cart");
+ 
+
 // Start when the document is ready
 if (document.readyState == "loading") {
     document.addEventListener('DOMContentLoaded', start);
@@ -130,7 +217,21 @@ function handle_changeItemQuantity() {
 function handle_buyOrder( ) {
     console.log("fdf");
     if (itemAdded.length<=0) {
-        alert("no order ")
+        // alert("no order ")
+       // Create an "li" node:
+const node = document.createElement("li");
+
+// Create a text node:
+const textnode = document.createTextNode("yor card is empty");
+
+ node.appendChild(textnode);
+
+       const dog= document.querySelector('.total').appendChild(node);//.appendChild="<h1>dddd</h1>"
+       console.log(dog);
+ 
+
+
+       
         //????
         return;
     }
